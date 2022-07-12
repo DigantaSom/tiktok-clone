@@ -19,6 +19,12 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+
   const onVideoPress = () => {
     if (isPlaying) {
       videoRef.current?.pause();
@@ -67,7 +73,7 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
           onMouseLeave={() => setIsHover(false)}
           className='rounded-3xl'
         >
-          <Link href='/'>
+          <Link href={`/detail/${post._id}`}>
             <video
               ref={videoRef}
               loop
