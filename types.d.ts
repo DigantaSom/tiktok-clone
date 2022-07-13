@@ -36,3 +36,13 @@ export interface IUser {
   userName: string;
   image: string;
 }
+
+export interface IComment {
+  comment: string;
+  length?: number;
+  _key: string;
+  postedBy: {
+    _id: string;
+    _ref: string;
+  };
+}
