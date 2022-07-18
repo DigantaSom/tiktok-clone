@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { client } from '../../../utils/client';
 import { allPostsQuery } from '../../../utils/queries';
+import { Video } from '../../../types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,8 +10,7 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const query = allPostsQuery();
-    const data = await client.fetch(query);
-
+    const data: Video[] = await client.fetch(query);
     res.status(200).json(data);
   } else if (req.method === 'POST') {
     const document = req.body;
